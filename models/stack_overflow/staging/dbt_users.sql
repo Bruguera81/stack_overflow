@@ -1,5 +1,5 @@
 
-with users_temp as (
+with dbt_users as (
 
     select 
        id,
@@ -7,7 +7,7 @@ with users_temp as (
         location,
         up_votes
 
-    from {{ source('my-wiki-data-bq','users') }}
+    from {{ source('my-wiki-data-bq','users_temp') }}
     order by up_votes desc
 )
-    select * from users_temp limit 100;
+    select * from dbt_users limit 1000
