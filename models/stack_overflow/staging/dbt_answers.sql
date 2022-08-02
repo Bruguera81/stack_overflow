@@ -14,4 +14,4 @@ with dbt_answers as  (
         --sum(cast(answer_count as Numeric)) as No_Anws_Count
     from {{ source('my-wiki-data-bq','answers_temp') }}
 )
-    select * from dbt_answers limit 1000
+    select * from dbt_answers
