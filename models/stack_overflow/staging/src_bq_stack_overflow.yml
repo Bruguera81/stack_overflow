@@ -4,9 +4,9 @@ version: 2
 sources:
   - name: my-wiki-data-bq
     database: my-wiki-data-bq
-    schema: stack_overflow
+    schema: dbt_stack_overflow
     tables:
-      - name: posts_questions
-      - name: users
-      - name: stackoverflow_posts
-      - name: posts_answers
+      - name: post_temp
+      - name: users_temp
+      - name: answers_temp
+      - name: questions_temp

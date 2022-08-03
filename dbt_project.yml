@@ -38,6 +38,6 @@ models:
     stack_overflow:
       staging:
         +materialized: view
-      core:
+      mart:
         +materialized: table
         
