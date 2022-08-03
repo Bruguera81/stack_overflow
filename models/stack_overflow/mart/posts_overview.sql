@@ -59,6 +59,8 @@ questions_and_answers as
         q.question_body,
         q.question_accepted_answer_id,
         q.creation_date,
+        EXTRACT(YEAR FROM q.creation_date) AS question_year,
+        EXTRACT(MONTH FROM q.creation_date) AS question_month,
         q.view_count as question_view_count,
         q.tags as question_tag,
         pa.answers_id,
@@ -87,8 +89,11 @@ post_overview as
         qa.question_id,
         qa.question_title,
         qa.question_body,
-        qa.question_accepted_answer_id,
+        qa.question_accepted_answer_id,      
         qa.creation_date as question_creation_date,
+        qa.question_year*100+question_month as question_year_month,
+        DATETIME_DIFF(TIMESTAMP(qa.answers_date),TIMESTAMP(qa.creation_date), HOUR) as QA_data_diff,
+        --DATETIME_DIFF(DATETIME
         qa.question_view_count,
         qa.answer_view_count,
         qa.question_tag,
@@ -102,9 +107,18 @@ post_overview as
     where  
     au.answer_id=qa.answers_id
     and qu.question_id=qa.question_id
+    and qa.question_year*100+question_month  = 202203
 )
 
-select * from post_overview
+select * from post_overview 
 
+-- With tem_date as 
+-- (
+-- select 
+--   EXTRACT(YEAR FROM question_creation_date) AS Year,
+--   EXTRACT(MONTH FROM question_creation_date) AS Month
+-- from `dbt_stack_overflow.posts_overview`
+-- )
 
+-- select Year*100+Month from tem_date;
 
